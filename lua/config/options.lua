@@ -3,4 +3,4 @@
 -- Add any additional options here
 
 local opt = vim.opt
-opt.clipboard = "unnamedplus" -- Sync with systemctl clipboard
+opt.clipboard = { "unnamed", "unnamedplus" } -- Sync with systemctl clipboard
