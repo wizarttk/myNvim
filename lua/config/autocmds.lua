@@ -2,6 +2,7 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+--------------------------------------------------------------------------------------------------------------------------
 -- 自动输入法切换
 -- check fcitx-remote (fcitx5-remote)
 -- 检查 fcitx-remot(fcitx5-remote)
@@ -55,3 +56,5 @@ vim.cmd([[
     au CmdlineLeave [/\?] :lua _Fcitx2en()
   augroup END
 ]])
+
+--------------------------------------------------------------------------------------------------------------------------

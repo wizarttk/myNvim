@@ -3,11 +3,13 @@
 if true then return {} end
 
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
+-- lazy.nvim将自动加载plugins目录的每个规范文件
 --
 -- In your plugin files, you can:
--- * add extra plugins
--- * disable/enabled LazyVim plugins
--- * override the configuration of LazyVim plugins
+-- * add extra plugins                                增加额外的插件
+-- * disable/enabled LazyVim plugins                  开启/关闭插件
+-- * override the configuration of LazyVim plugins    覆盖lazyvim的插件配置
+
 return {
   -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
@@ -20,17 +22,17 @@ return {
     },
   },
 
-  -- change trouble config
+  -- change trouble config                          # 更改 troube 配置
   {
     "folke/trouble.nvim",
-    -- opts will be merged with the parent spec
+    -- opts will be merged with the parent spec     # opts 将与父规范合并
     opts = { use_diagnostic_signs = true },
   },
 
-  -- disable trouble
+  -- disable trouble                                # 禁用 troube 插件
   { "folke/trouble.nvim", enabled = false },
 
-  -- add symbols-outline
+  -- add symbols-outline                            # 添加 symbols-outline
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
@@ -38,7 +40,7 @@ return {
     config = true,
   },
 
-  -- override nvim-cmp and add cmp-emoji
+  -- override nvim-cmp and add cmp-emoji            # 覆盖 nvim-cmp 并且添加 cmp-emoji
   {
     "hrsh7th/nvim-cmp",
     dependencies = { "hrsh7th/cmp-emoji" },
@@ -48,11 +50,11 @@ return {
     end,
   },
 
-  -- change some telescope options and a keymap to browse plugin files
+  -- change some telescope options and a keymap to browse plugin files   # 更改一些telescope选项，和一个用来浏览插件文件的快捷键
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      -- add a keymap to browse plugin files
+      -- add a keymap to browse plugin files  # 添加 keymap
       -- stylua: ignore
       {
         "<leader>fp",
@@ -83,20 +85,20 @@ return {
     },
   },
 
-  -- add pyright to lspconfig
+  -- add pyright to lspconfig                 # 添加pyright 到 lspconfig
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = {
       ---@type lspconfig.options
       servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
+        -- pyright will be automatically installed with mason and loaded with lspconfig    # pyright 将自动通过 mason 安装并通过 lspconfig 加载pyright
         pyright = {},
       },
     },
   },
 
-  -- add tsserver and setup with typescript.nvim instead of lspconfig
+  -- add tsserver and setup with typescript.nvim instead of lspconfig   # 添加 tsserver 并使用 typescript.nvim 进行设置,而不是 lspconfig
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -131,11 +133,11 @@ return {
     },
   },
 
-  -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
-  -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
+  -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,     # 对于 typescript,LazyVim 还包括额外的规范来正确设置 lspconfig、
+  -- treesitter, mason and typescript.nvim. So instead of the above, you can use:       # treesitter、mason 和 typescript.nvim。所以你可以使用:
   { import = "lazyvim.plugins.extras.lang.typescript" },
 
-  -- add more treesitter parsers
+  -- add more treesitter parsers       # 添加更多的 treesitter 解析器
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -161,6 +163,9 @@ return {
   -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
   -- would overwrite `ensure_installed` with the new value.
   -- If you'd rather extend the default config, use the code below instead:
+  -- 由于 `vim.tbl_deep_extend` 只能合并表而不能合并列表,上面的代码
+  -- 将会用新值覆盖 `ensure_installed`。
+  -- 如果你想扩展默认配置,请使用下面的代码:
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -172,7 +177,7 @@ return {
     end,
   },
 
-  -- the opts function can also be used to change the default opts:
+  -- the opts function can also be used to change the default opts:    # opts 函数也可以用于更改默认选项:
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -181,24 +186,28 @@ return {
     end,
   },
 
-  -- or you can return new options to override all the defaults
+  -- or you can return new options to override all the defaults      # 或者你可以返回新的选项来覆盖所有默认值
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
       return {
         --[[add your custom lualine config here]]
+        --在此处添加你自定义的 lualine 配置
       }
     end,
   },
 
   -- use mini.starter instead of alpha
+  -- 使用 mini.starter 代替 alpha
   { import = "lazyvim.plugins.extras.ui.mini-starter" },
 
   -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
+  -- 添加 jsonls 和 schemastore 包，并为 json、json5、jsonc 配置treesitter
   { import = "lazyvim.plugins.extras.lang.json" },
 
   -- add any tools you want to have installed below
+  -- 在线面添加你想要的任何工具
   {
     "williamboman/mason.nvim",
     opts = {
@@ -213,6 +222,8 @@ return {
 
   -- Use <tab> for completion and snippets (supertab)
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip
+  -- 使用 <tab> 进行补全和代码片段 (supertab)
+  -- 首先: 在 LuaSnip 中禁用默认的 <tab> 和 <s-tab> 行为
   {
     "L3MON4D3/LuaSnip",
     keys = function()
@@ -220,6 +231,7 @@ return {
     end,
   },
   -- then: setup supertab in cmp
+  -- 然后：在cmp中配置 supertab
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -242,6 +254,8 @@ return {
             cmp.select_next_item()
             -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
             -- this way you will only jump inside the snippet region
+            -- 你可以将 expand_or_jumpable() 调用替换为 expand_or_locally_jumpable()
+            -- 这样你只会在代码片段区域内跳转
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then
