@@ -3,7 +3,7 @@ return {
   -- config = require("neo-tree").setup({
   opts = {
     window = {
-      mappings = { -- 映射
+      mappings = { -- 映射 opts.window.mappings
         ["o"] = "open", -- 使用 o 打开文件或目录
         ["."] = "toggle_hidden", -- 使用 . 切换是否显示隐藏文件
 

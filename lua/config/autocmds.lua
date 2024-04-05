@@ -1,60 +1,29 @@
 -- Autocmds are automatically loaded on the VeryLazy event
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
+-- VIM有命令的文档：https://yianwillis.github.io/vimcdoc/doc/autocmd.html#BufNew
 
 --------------------------------------------------------------------------------------------------------------------------
 -- 自动输入法切换
--- check fcitx-remote (fcitx5-remote)
--- 检查 fcitx-remot(fcitx5-remote)
-local fcitx_cmd = ""
-if vim.fn.executable("fcitx-remote") == 1 then
-  fcitx_cmd = "fcitx-remote"
-elseif vim.fn.executable("fcitx5-remote") == 1 then
-  fcitx_cmd = "fcitx5-remote"
-else
-  return
-end
+vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+  pattern = { "*" },
+  callback = function()
+    local input_status = tonumber(vim.fn.system("fcitx5-remote"))
+    if input_status == 2 then
+      vim.fn.system("fcitx5-remote -c")
+    end
+  end,
+})
 
-if os.getenv("SSH_TTY") ~= nil then
-  return
-end
-
-local os_name = vim.loop.os_uname().sysname
-if
-  (os_name == "Linux" or os_name == "Unix")
-  and os.getenv("DISPLAY") == nil
-  and os.getenv("WAYLAND_DISPLAY") == nil
-then
-  return
-end
-
-function _Fcitx2en()
-  local input_status = tonumber(vim.fn.system(fcitx_cmd))
-  if input_status == 2 then
-    -- input_toggle_flag means whether to restore the state of fcitx
-    vim.b.input_toggle_flag = true
-    -- switch to English input "fictx-remote -c"
-    vim.fn.system(fcitx_cmd .. " -c")
-  end
-end
-
-function _Fcitx2NonLatin()
-  if vim.b.input_toggle_flag == nil then
-    vim.b.input_toggle_flag = false
-  elseif vim.b.input_toggle_flag == true then
-    -- switch to Non-Latin input
-    vim.fn.system(fcitx_cmd .. " -o")
-    vim.b.input_toggle_flag = false
-  end
-end
-
-vim.cmd([[
-  augroup fcitx
-  " au InsertEnter * :lua _Fcitx2NonLatin()
-    au InsertLeave * :lua _Fcitx2en()
-    au CmdlineEnter [/\?] :lua _Fcitx2NonLatin()
-    au CmdlineLeave [/\?] :lua _Fcitx2en()
-  augroup END
-]])
-
---------------------------------------------------------------------------------------------------------------------------
+-- 自动插入shebang
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = { "*.sh" }, -- 匹配
+  callback = function()
+    local firstLine = vim.fn.getline(1)
+    if string.match(firstLine, "#!") then
+      return
+    else
+      vim.fn.setbufline(vim.fn.bufnr(), 1, "#!/usr/bin/zsh")
+    end
+  end,
+})
