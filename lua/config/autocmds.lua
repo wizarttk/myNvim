@@ -1,7 +1,7 @@
 -- Autocmds are automatically loaded on the VeryLazy event
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
--- VIM有命令的文档：https://yianwillis.github.io/vimcdoc/doc/autocmd.html#BufNew
+-- VIM命令的文档：https://yianwillis.github.io/vimcdoc/doc/autocmd.html#BufNew
 
 --------------------------------------------------------------------------------------------------------------------------
 -- 自动输入法切换

@@ -1,18 +1,29 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+--[[
+全局映射：(更加底层)
+      vim.api.nvim_set_keymap()
+      vim.api.nvim_get_keymap()
+      vim.api.nvim_del_keymap()
+缓冲区映射：(用于特定缓冲区)
+      vim.api.nvim_buf_set_keymap()
+      vim.api.nvim_buf_get_keymap()
+      vim.api.nvim_buf_del_keymap()
+推荐使用： (包装好的,可以实现复杂功能,可以使用函数)
+      vim.keymap.set()
+      vim.keymap.del()
 
---[[                     模板
-            vim.keymap.set(mode, lhs, rhs, opts)
-              mode  模式
-              lhs   按键
-              rhs   功能(string|function )
-              opts  一个表,包含了一些额外的选项,如 buffer、remap、noremap、desc等
+插件的映射在"plugins目录"中设置
 --]]
 
 -- 在任何模式下将 Shift+h 映射成 0；将Shift+l 映射成 $
 vim.api.nvim_set_keymap("", "<S-l>", "$", { noremap = true })
 vim.api.nvim_set_keymap("", "<S-h>", "0", { noremap = true })
+
+-- 禁用原生的按键
+vim.keymap.set({"n", "v"}, "S", "<Nop>", { noremap = true })
+vim.keymap.set({"n", "v"}, "S", "<Nop>", { noremap = true })
 
 -- 在normal,visual模式下，使用Ctrl + u ，Ctrl + u可以移动指定行数，将光标置于屏幕中间(zz)
 vim.keymap.set(
