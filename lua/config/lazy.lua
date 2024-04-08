@@ -1,7 +1,7 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim" -- 获取neovim插件在当前系统下的安装路径，并赋值给lazypath
+if not vim.loop.fs_stat(lazypath) then -- vim.loop.sf_stat检查文件或路径的状态，如果返回flase/nil，则路径不存在，执行then后面的
   -- bootstrap lazy.nvim
-  vim.fn.system({
+  vim.fn.system({ -- 用于执行系统命令，克隆lazy.nvim插件的稳定分支到本地指定路径lazypath下
     "git",
     "clone",
     "--filter=blob:none",
@@ -10,7 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+vim.opt.rtp:prepend(vim.env.LAZY or lazypath) -- 将 Lazy.nvim 插件的路径添加到 Neovim 的运行时路径 (runtime path, rtp) 的开头 -- :冒号用来调用表中的方法（使用元表添加的方法）
 
 require("lazy").setup({
   -- spec 表指定要安装和加载的插件
@@ -24,7 +24,7 @@ require("lazy").setup({
     -- import/override with your plugins
     { import = "plugins" },
 
-    -- add Scheme
+    -- import 和 require 不会递归加载目录下面子目录中的模块
     { import = "plugins.Schemes" }, -- 主题新增和修改
     { import = "plugins.FixPlugs" }, -- 修改已有插件
     { import = "plugins.NewPlugs" }, -- 新增插件
