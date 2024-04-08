@@ -17,14 +17,51 @@
 插件的映射在"plugins目录"中设置
 --]]
 
--- 在任何模式下将 Shift+h 映射成 0；将Shift+l 映射成 $
-vim.api.nvim_set_keymap("", "<S-l>", "$", { noremap = true })
-vim.api.nvim_set_keymap("", "<S-h>", "0", { noremap = true })
 
 -- 禁用原生的按键
 vim.keymap.set({"n", "v"}, "S", "<Nop>", { noremap = true })
 vim.keymap.set({"n", "v"}, "S", "<Nop>", { noremap = true })
+vim.keymap.set({"n", "v"}, "J", "<Nop>", { noremap = true })
+vim.keymap.set({"n","v"}, "0", "<Nop>", { noremap = true })
+vim.keymap.set({"n","v"}, "q", "<Nop>", { noremap = true })
 
+-- 将 normal、visual 模式下的 0 映射为 q (宏)
+vim.keymap.set({"n","v"},"0","q",{noremap = true})
+
+-- 将 normal visual 模式下的 <C-f> 映射为 /
+vim.keymap.set({"n","v"}, "<C-f>", "/", { noremap = true })
+-- 将 insert 模式下的 <C-f> 映射为 "{"
+--
+-- vim.keymap.set("i", "<C-f>",function()
+--   return tostring( vim.fn.nr2char("123"))
+-- end,{ noremap = true})
+
+
+
+-- 在任何模式下将 Shift+h 映射成 0；将Shift+l 映射成 $
+vim.api.nvim_set_keymap("", "<S-l>", "$", { noremap = true })
+vim.api.nvim_set_keymap("", "<S-h>", "0", { noremap = true })
+
+-- 切换buffer
+vim.keymap.set("n", "<C-S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" }) -- 将<C-S-h>映射为转到前一个buffer
+vim.keymap.set("n", "<C-S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" }) -- 将<C-S-l>映射为转到下一个buffer
+vim.keymap.set("n", "<C-a>", "<cmd>bdel<cr>", { desc = "Delete Buffer" }) -- 将<C-a>映射为关闭当前buffer
+
+-- 切换窗口(win)
+-- 在 insert 模式时也能切换窗口 
+  -- <C-j> 切换到下方窗口
+vim.keymap.set('i', '<C-j>', function()
+  vim.cmd('wincmd j')
+  vim.cmd("stopinsert") -- 使用vim的内部命令，退出插入模式
+end, { noremap = true })
+
+  -- <C-k> 切换到上方窗口
+vim.keymap.set('i', '<C-k>', function()
+  vim.cmd('wincmd k')
+  vim.cmd("stopinsert")
+end, { noremap = true })
+
+---------------------------------------------------------------------------------------------
 -- 在normal,visual模式下，使用Ctrl + u ，Ctrl + u可以移动指定行数，将光标置于屏幕中间(zz)
 vim.keymap.set(
   { "n", "v" },
@@ -52,8 +89,5 @@ vim.keymap.set(
   "5k",
   { noremap = true, desc = "Scroll up 10 lines and center cursor after moving" }
 )
+---------------------------------------------------------------------------------------------
 
--- 切换buffer
-vim.keymap.set("n", "<C-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" }) -- 将<C-h>映射为转到前一个buffer
-vim.keymap.set("n", "<C-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" }) -- 将<C-l>映射为转到下一个buffer
-vim.keymap.set("n", "<C-a>", "<cmd>bdel<cr>", { desc = "Delete Buffer" }) -- 将<C-a>映射为关闭当前buffer
