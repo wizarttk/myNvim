@@ -4,6 +4,8 @@
       使用 :h flash 打开help文档
 --]]
 
+-- 配置文件思路： 使用<leader>l 1. 找到要配置的插件 -- 回车，cd到第一条目录中，打开lua目录的主配置文件(一般是config.lua  2. 根据主模块(M)的结构，可以改写opts
+
 return {
   "folke/flash.nvim",
   opts = {

@@ -37,7 +37,7 @@ return {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-    config = true,
+    config = true, -- 表示使用 lazy.nvim 的默认配置逻辑,即自动调用插件主模块的 setup(opts) 函数,将 opts 传递给插件。
   },
 
   -- override nvim-cmp and add cmp-emoji            # 覆盖 nvim-cmp 并且添加 cmp-emoji
@@ -45,7 +45,7 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = { "hrsh7th/cmp-emoji" },
     ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
+    opts = function(_, opts) -- opt是一个函数，提供一个钩子来修改或替换默认的配置选项。函数参数接收一个默认配置表,函数返回值将作为最终传递给插件的配置。
       table.insert(opts.sources, { name = "emoji" })
     end,
   },
@@ -63,7 +63,7 @@ return {
       },
     },
     -- change some options
-    opts = {
+    opts = { -- opt是一个表格，直接将这个表格作为插件的配置选项传递给插件。
       defaults = {
         layout_strategy = "horizontal",
         layout_config = { prompt_position = "top" },
@@ -76,7 +76,7 @@ return {
   -- add telescope-fzf-native
   {
     "telescope.nvim",
-    dependencies = {
+    dependencies = { -- 列出插件所以来的其他插件
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
       config = function()
