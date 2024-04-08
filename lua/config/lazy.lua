@@ -27,7 +27,7 @@ require("lazy").setup({
     -- add Scheme
     { import = "plugins.Schemes" }, -- 主题新增和修改
     { import = "plugins.FixPlugs" }, -- 修改已有插件
-    -- { import = "plugins.NewPlugs" }, -- 新增插件
+    { import = "plugins.NewPlugs" }, -- 新增插件
   },
   defaults = {
     -- defaults 表设置了一些默认选项。

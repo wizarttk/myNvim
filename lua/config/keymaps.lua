@@ -39,6 +39,9 @@ vim.keymap.set({"n","v"}, "<C-f>", "/", { noremap = true })
 vim.api.nvim_set_keymap("", "<S-l>", "$", { noremap = true })
 vim.api.nvim_set_keymap("", "<S-h>", "0", { noremap = true })
 
+-- 将 normal、visual 模式下使用<leader>t来打开vim-translator
+vim.keymap.set({"v","n"}, "<leader>t", "<cmd>Translate<cr>", { noremap = true, desc = "display the translation in a window"})
+
 -- 切换buffer
 vim.keymap.set("n", "<C-S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" }) -- 将<C-S-h>映射为转到前一个buffer
 vim.keymap.set("n", "<C-S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" }) -- 将<C-S-l>映射为转到下一个buffer
