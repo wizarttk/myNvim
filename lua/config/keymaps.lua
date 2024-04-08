@@ -24,19 +24,16 @@ vim.keymap.set({"n", "v"}, "S", "<Nop>", { noremap = true })
 vim.keymap.set({"n", "v"}, "J", "<Nop>", { noremap = true })
 vim.keymap.set({"n","v"}, "0", "<Nop>", { noremap = true })
 vim.keymap.set({"n","v"}, "q", "<Nop>", { noremap = true })
+vim.keymap.set({"n","v"}, "<C-S-j>", "<Nop>", { noremap = true })
+vim.keymap.set({"n","v"}, "<C-w>>", "<Nop>", { noremap = true }) -- 原本是增加窗口宽度
+vim.keymap.set({"n","v"}, "<C-w><", "<Nop>", { noremap = true }) -- 原本是减少窗口宽度
+
 
 -- 将 normal、visual 模式下的 0 映射为 q (宏)
 vim.keymap.set({"n","v"},"0","q",{noremap = true})
 
 -- 将 normal visual 模式下的 <C-f> 映射为 /
 vim.keymap.set({"n","v"}, "<C-f>", "/", { noremap = true })
--- 将 insert 模式下的 <C-f> 映射为 "{"
---
--- vim.keymap.set("i", "<C-f>",function()
---   return tostring( vim.fn.nr2char("123"))
--- end,{ noremap = true})
-
-
 
 -- 在任何模式下将 Shift+h 映射成 0；将Shift+l 映射成 $
 vim.api.nvim_set_keymap("", "<S-l>", "$", { noremap = true })
@@ -56,10 +53,21 @@ vim.keymap.set('i', '<C-j>', function()
 end, { noremap = true })
 
   -- <C-k> 切换到上方窗口
-vim.keymap.set('i', '<C-k>', function()
+vim.keymap.set("i", "<C-k>", function()
   vim.cmd('wincmd k')
   vim.cmd("stopinsert")
 end, { noremap = true })
+
+-- 调整窗口宽度(最右侧窗口不能使用)
+  -- 使用 <C-.> 向右移动
+vim.keymap.set({ "n","v","i" }, "<C-.>", function()
+  vim.fn.win_move_separator(vim.fn.winnr(), 5)
+  end, { noremap = true })
+
+  -- 使用 <C-,> 向左移动
+vim.keymap.set({ "n","v","i" }, "<C-,>", function()
+  vim.fn.win_move_separator(vim.fn.winnr(), -5)
+  end, { noremap = true })
 
 ---------------------------------------------------------------------------------------------
 -- 在normal,visual模式下，使用Ctrl + u ，Ctrl + u可以移动指定行数，将光标置于屏幕中间(zz)
