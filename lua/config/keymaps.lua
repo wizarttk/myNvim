@@ -40,8 +40,40 @@ vim.api.nvim_set_keymap("", "<S-l>", "$", { noremap = true })
 vim.api.nvim_set_keymap("", "<S-h>", "0", { noremap = true })
 
 -- 将 normal、visual 模式下使用<leader>j来打开vim-translator
-vim.keymap.set({"v","n"}, "<leader>j", "<cmd>Translate<cr>", { noremap = true, desc = "display the translation in a window"})
+vim.keymap.set({"v","n"}, "<leader>j", function()
+  if vim.fn.mode() == "v" then
+    -- vim.cmd('normal! gv"xy')
+    -- local text = vim.fn.getreg("x")
+    -- vim.cmd([[Translate --engines=google ]] ..text)
+    vim.cmd[['<,'>Translate --engines=google]]
+  else
+    vim.cmd("Translate --engines=haici")
+  end
+end, { noremap = true, desc = "display the translation in a window"})
 
+-- 在 visual 模式下，直接输入 引号 括号 书名号  进行包围（使用surround.nvim插件）
+  -- 引号
+vim.keymap.set("v", "'", function() vim.cmd("norm gsa'") end, { noremap = true })
+vim.keymap.set("v", "\"", function() vim.cmd("norm gsa\"") end, { noremap = true })
+  -- 大括号
+vim.keymap.set("v", "]", function() vim.cmd("norm gsa]") end, { noremap = true })
+vim.keymap.set("v", "[", function() vim.cmd("norm gsa[") end, { noremap = true })
+  -- 小括号
+vim.keymap.set("v", "(", function() vim.cmd("norm gsa(") end, { noremap = true })
+vim.keymap.set("v", ")", function() vim.cmd("norm gsa)") end, { noremap = true })
+  -- 大括号
+vim.keymap.set("v", "{", function() vim.cmd("norm gsa{") end, { noremap = true })
+vim.keymap.set("v", "}", function() vim.cmd("norm gsa}") end, { noremap = true })
+  -- 单书名号
+vim.keymap.set("v", "<", function() vim.cmd("norm gsa<") end, { noremap = true })
+vim.keymap.set("v", ">", function() vim.cmd("norm gsa>") end, { noremap = true })
+
+-- 拓展 v 的范围
+  -- 普通模式下双击v，选中当前单词
+vim.keymap.set({ "n" },"vv", function() vim.cmd("norm viw") end, { noremap = true }, { desc = "Select the current word" })
+
+-------------------------------------------------------------------------------------------
+--buffer 和 窗口（win）
 -- 切换buffer
 vim.keymap.set("n", "<C-S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" }) -- 将<C-S-h>映射为转到前一个buffer
 vim.keymap.set("n", "<C-S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" }) -- 将<C-S-l>映射为转到下一个buffer
