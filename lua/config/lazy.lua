@@ -1,7 +1,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim" -- 获取neovim插件在当前系统下的安装路径，并赋值给lazypath
-if not vim.loop.fs_stat(lazypath) then -- vim.loop.sf_stat检查文件或路径的状态，如果返回flase/nil，则路径不存在，执行then后面的
+if not vim.loop.fs_stat(lazypath) then                       -- vim.loop.sf_stat检查文件或路径的状态，如果返回flase/nil，则路径不存在，执行then后面的
   -- bootstrap lazy.nvim
-  vim.fn.system({ -- 用于执行系统命令，克隆lazy.nvim插件的稳定分支到本地指定路径lazypath下
+  vim.fn.system({                                            -- 用于执行系统命令，克隆lazy.nvim插件的稳定分支到本地指定路径lazypath下
     "git",
     "clone",
     "--filter=blob:none",
@@ -15,8 +15,8 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath) -- 将 Lazy.nvim 插件的路径�
 require("lazy").setup({
   -- spec 表指定要安装和加载的插件
   spec = {
-    -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- import 是一个特殊的键,用于告诉 lazy.nvim 插件管理器从哪里导入你自定义的插件配置(路径是相对路径)。
+    { "LazyVim/LazyVim",          import = "lazyvim.plugins" },
     -- import any extras modules here
     -- { import = "lazyvim.plugins.extras.lang.typescript" },
     -- { import = "lazyvim.plugins.extras.lang.json" },
@@ -25,7 +25,7 @@ require("lazy").setup({
     { import = "plugins" },
 
     -- import 和 require 不会递归加载目录下面子目录中的模块
-    { import = "plugins.Schemes" }, -- 主题新增和修改
+    { import = "plugins.Schemes" },  -- 主题新增和修改
     { import = "plugins.FixPlugs" }, -- 修改已有插件
     { import = "plugins.NewPlugs" }, -- 新增插件
   },
@@ -40,8 +40,8 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight", "habamax" } }, -- install 表指定了要安装的插件
-  checker = { enabled = true }, -- automatically check for plugin updates  -- checker 表启用了插件更新检查器,它会自动检查插件是否有新的更新版本。
-  performance = { -- performance 表用于优化 Neovim 的性能。在这里,它禁用了一些不需要的内置 Neovim 插件,以提高启动速度和减少内存使用。
+  checker = { enabled = true },                            -- automatically check for plugin updates  -- checker 表启用了插件更新检查器,它会自动检查插件是否有新的更新版本。
+  performance = {                                          -- performance 表用于优化 Neovim 的性能。在这里,它禁用了一些不需要的内置 Neovim 插件,以提高启动速度和减少内存使用。
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {

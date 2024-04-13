@@ -1,4 +1,5 @@
 -- 帮助文件在命令模式输入 :h bufferline
+
 return {
   "akinsho/bufferline.nvim",
   opts = {
@@ -14,4 +15,7 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    require("bufferline").setup(opts)
+  end
 }

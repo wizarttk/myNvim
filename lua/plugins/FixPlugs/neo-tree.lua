@@ -3,8 +3,8 @@ return {
   -- config = require("neo-tree").setup({
   opts = {
     window = {
-      mappings = { -- 映射 opts.window.mappings
-        ["o"] = "open", -- 使用 o 打开文件或目录
+      mappings = {               -- 映射 opts.window.mappings
+        ["o"] = "open",          -- 使用 o 打开文件或目录
         ["."] = "toggle_hidden", -- 使用 . 切换是否显示隐藏文件
 
         ["h"] = function(state)
@@ -71,28 +71,8 @@ return {
       end,
     },
   },
+
+  config = function(_, opts)
+    require("neo-tree").setup(opts)
+  end
 }
-
--- return {
---   "nvim-neo-tree/neo-tree.nvim",
---   sconfig = require("neo-tree").setup({
---     function()
---       local window = {
---         mappings = {
---           ["o"] = "open",
---         },
---       }
---     end,
---   }),
--- }
-
--- return {
---   "nvim-neo-tree/neo-tree.nvim",
---   opts = {
---     window = {
---       mappings = {
---         ["o"] = "open",
---       },
---     },
---   },
--- }

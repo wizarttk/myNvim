@@ -23,7 +23,21 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     if string.match(firstLine, "#!") then
       return
     else
-      vim.fn.setbufline(vim.fn.bufnr(), 1, "#!/usr/bin/zsh")
+      vim.fn.setbufline(vim.fn.bufnr(), 1, "#!/usr/bin/bash")
     end
   end,
+})
+
+-- linter自动命令
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  pattern = { "*.sh" },
+  callback = function()
+    require('lint').try_lint("shellcheck")
+  end
+})
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  pattern = { "*.js" },
+  callback = function()
+    require("lint").try_lint("oxlint")
+  end
 })

@@ -2,7 +2,7 @@
 -- stylua: ignore
 if true then return {} end
 
--- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
+-- every spec file under the "plugins directory will be loaded automatically by lazy.nvim
 -- lazy.nvim将自动加载plugins目录的每个规范文件
 --
 -- In your plugin files, you can:
@@ -10,6 +10,43 @@ if true then return {} end
 -- * disable/enabled LazyVim plugins                  开启/关闭插件
 -- * override the configuration of LazyVim plugins    覆盖lazyvim的插件配置
 
+--[[ 配置字段
+      dir: 字符串,指定插件在本地存储的目录路径
+      url: 字符串,指定插件的远程 Git 仓库 URL
+      name: 字符串,指定插件的名称
+      dev: 布尔值,如果设置为 true,则从开发分支加载插件
+      lazy: 布尔值,如果设置为 true,则延迟加载插件
+      enabled: 布尔值或函数,控制是否启用该插件
+      cond: 函数,根据条件函数的返回值决定是否加载插件
+      dependencies: 表格,指定在加载该插件之前需要先加载的依赖插件列表
+      init: 函数,在插件加载前运行的初始化函数
+      main: 字符串,指定插件的主文件路径
+      build: 字符串或函数,指定插件构建命令
+      branch: 字符串,指定要加载的插件分支
+      tag: 字符串,指定要加载的插件标签
+      commit: 字符串,指定要加载的插件提交哈希值
+      version: 字符串,指定插件的版本约束
+      pin: 布尔值,如果设置为 true,则固定插件版本,不会自动更新
+      submodules: 布尔值,如果设置为 true,则递归更新插件的子模块
+      event: 字符串或表格,指定触发插件加载的事件
+      cmd: 字符串或表格,指定触发插件加载的命令
+      ft: 字符串或表格,指定插件只对特定文件类型生效
+      keys: 字符串或表格,指定触发插件加载的快捷键映射
+      module: 字符串,指定加载的插件模块
+      priority: 数字,设置插件的加载优先级
+      optional: 布尔值,如果设置为 true,则即使插件加载失败也不会导致错误
+***重点
+      opts:  表格，指定插件的静态配置选项及其值。这些选项会在插件加载时传递给插件,用于定制插件的行为。
+      config: 函数,该函数会在插件加载完成后执行.你可以在这个函数中编写一些额外的动态配置代码,
+              比如设置键映射、调用插件提供的api（如require("plugin_name").setup(opts)）、修改插件内部状态等。
+--]]
+
+-- 通过在文件开头使用 return，可以显式地指定将这个配置表格作为整个文件的返回值(返回给lazy.lua)
+-- 在lua中，当一个文件被加载时，它本身就作为一个代码快被执行，这个文件的最后一行代码执行完毕后，Lua解释其回去最后一个值作为返回值
+-- Lua 中一种常见的编码习惯,通过 return 显式地返回需要的值，没有 return 语句，则默认情况下，Lua 解释器会返回 nil
+--
+-- 在 Neovim 配置中,通常会有一个入口文件(一般是init.lua，这里是lazy.lua)负责引入和加载各个模块或配置文件。
+-- 当你使用 require 语句加载一个 Lua 文件时,实际上就是执行了该文件中的所有代码,并获取该文件的返回值。
 return {
   -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
@@ -30,7 +67,7 @@ return {
   },
 
   -- disable trouble                                # 禁用 troube 插件
-  { "folke/trouble.nvim", enabled = false },
+  { "folke/trouble.nvim",      enabled = false },
 
   -- add symbols-outline                            # 添加 symbols-outline
   {
@@ -106,7 +143,7 @@ return {
       init = function()
         require("lazyvim.util").lsp.on_attach(function(_, buffer)
           -- stylua: ignore
-          vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
+          vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
           vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
         end)
       end,
