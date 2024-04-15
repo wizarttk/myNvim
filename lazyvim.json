@@ -1,6 +1,7 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.dap.nlua"
+    "lazyvim.plugins.extras.dap.nlua",
+    "lazyvim.plugins.extras.editor.outline"
   ],
   "news": {
     "NEWS.md": "3314"
