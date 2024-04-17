@@ -77,7 +77,9 @@ return {
           },
           n = {
             ["q"] = actions.close,
-            ["o"] = actions.select_default,
+            ["o"] = actions.select_default,    -- open in buffer
+            ["s"] = actions.select_vertical,   -- open in vsplit
+            ["S"] = actions.select_horizontal, -- open in splits
           },
         },
       },
