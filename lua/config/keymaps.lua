@@ -46,15 +46,17 @@ local width_reduce = function()
 end
 
 -- change the location of current window
+-- echo win_screenpos(0) 使用这个命令查看当前所在窗口的坐标
 local ch_win_location = function()
-  -- local screen_line = vim.fn.line()
-  local screen_pos = vim.fn.win_screenpos(vim.fn.win_getid()) -- 获取当前窗口左上角在屏幕上的座标
-  if screen_pos[1] == 2 then
-    if screen_pos[2] ~= 1 then
+  local screen_pos = vim.fn.win_screenpos(vim.fn.win_getid()) -- 获取当前窗口左上角在屏幕上的坐标
+  local screen_pos_row = screen_pos[1]                        -- 行坐标
+  local screen_pos_col = screen_pos[2]                        -- 列坐标
+  if screen_pos_row == 1 or screen_pos_row == 2 then          -- 行坐标为1或2，表明实在垂直窗口（在屏幕上面)
+    if screen_pos_col ~= 1 then                               -- 列坐标不为1，表明不是第一个窗口
       vim.cmd("wincmd J")
     end
   else
-    vim.cmd("wincmd L")
+    vim.cmd("wincmd L") -- 水平窗口
   end
 end
 
