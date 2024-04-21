@@ -10,7 +10,7 @@ return {
       colors.bg_dark = "#0d1117"    -- 黑色背景色
       colors.bg_sidebar = "#11171f" -- 侧边栏颜色
       colors.comment = "#a3a2a2"    -- 注释颜色
-      -- colors.fg_gutter = "#92b8cf"  # 行号区域的前景色
+      -- colors.fg_gutter = "#92b8cf"  -- 行号区域的前景色
     end,
     -- 覆盖高亮组
     on_highlights = function(hl, colors)
