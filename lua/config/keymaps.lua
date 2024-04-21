@@ -45,6 +45,19 @@ local width_reduce = function()
   vim.fn.win_move_separator(vim.fn.winnr(), -5)
 end
 
+-- change the location of current window
+local ch_win_location = function()
+  -- local screen_line = vim.fn.line()
+  local screen_pos = vim.fn.win_screenpos(vim.fn.win_getid()) -- 获取当前窗口左上角在屏幕上的座标
+  if screen_pos[1] == 2 then
+    if screen_pos[2] ~= 1 then
+      vim.cmd("wincmd J")
+    end
+  else
+    vim.cmd("wincmd L")
+  end
+end
+
 -- mode
 local mode_all = { "n", "v", "i" }
 local mode_nv = { "n", "v" }
@@ -62,6 +75,7 @@ local mappings = {
   { mode_nv,  "<C-S-j>",   "<Nop>",                                 { noremap = true } },
   { mode_nv,  "<C-w>>",    "<Nop>",                                 { noremap = true } },
   { mode_nv,  "<C-w><",    "<Nop>",                                 { noremap = true } },
+  { mode_nv,  "M",         "<Nop>",                                 { noremap = true } },
 
   -- mode_all
   { mode_all, "<C-.>",     width_increase,                          { noremap = true, desc = "increase window width" } },
@@ -79,6 +93,7 @@ local mappings = {
   { mode_n,   "<C-a>",     "<cmd>bdel<cr>",                         { desc = "Delete Buffer" } },
   { mode_n,   "vv",        "<cmd>norm viw<cr>",                     { desc = "Select the current word" } },
   { mode_n,   "<leader>j", "<cmd>Translate --endgines=google<cr>",  { noremap = true, desc = "display the translation in a window" } },
+  { mode_n,   "M",         ch_win_location,                         { noremap = true, desc = "change the location of window" } }, -- change the window location
 
   { mode_n,   "''",        "<cmd>norm gsd'<cr>",                    { noremap = true, desc = "surround del '" } },
   { mode_n,   "\"\"",      "<cmd>norm gsd\"<cr>",                   { noremap = true, desc = "surround del \"" } },
