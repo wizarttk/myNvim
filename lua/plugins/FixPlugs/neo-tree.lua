@@ -82,7 +82,7 @@ return {
           ["A"]  = false,
           ["w"]  = false,
           ["t"]  = false,
-          ["?"]  = false,
+          -- ["?"]  = false,
           -- ["D"]  = false,
           ["oc"] = false,
           ["od"] = false,
@@ -110,11 +110,11 @@ return {
           [",s"] = "order_by_size",     -- 按照大小排序
 
           ["D"]  = "diff_files",
-          ["~"]  = "show_help",       -- 显示“帮助”
-          ["."]  = "toggle_hidden",   -- 使用 . 切换是否显示隐藏文件
+          -- ["~"]  = "show_help",       -- 显示“帮助”
+          ["."]  = "toggle_hidden",    -- 使用 . 切换是否显示隐藏文件
           ["Z"]  = "expand_all_nodes", -- 使用 zz 展开所有目录
 
-          ["h"]  = function(state)    -- state是neo-tree内部的一个状态对象，它包含了当前文件树视图的各种状态信息
+          ["h"]  = function(state)     -- state是neo-tree内部的一个状态对象，它包含了当前文件树视图的各种状态信息
             local node = state.tree:get_node()
             if node.type == "directory" and node:is_expanded() then
               require("neo-tree.sources.filesystem").toggle_directory(state, node)

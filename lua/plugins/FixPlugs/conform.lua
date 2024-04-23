@@ -6,9 +6,9 @@ return {
       lua        = { "luaformatter" },
       zsh        = { "beautysh" },
       bash       = { "beautysh" },
-      python     = { "pyright" },
+      -- python     = { "pyright" },
       javascript = { "tsserver" },
-      go         = { "gopls" }
+      -- go         = { "gopls" }
     },
   },
 

@@ -1,6 +1,6 @@
 -- 该插件可以对Neovim中的颜色代码进行高亮
 return {
-  VeryLazy = true,
+  -- VeryLazy = true,
   "norcalli/nvim-colorizer.lua",
   opts = {
     user_default_options = {

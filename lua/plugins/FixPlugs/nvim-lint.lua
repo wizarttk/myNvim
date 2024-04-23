@@ -17,6 +17,7 @@ return {
     linters_by_ft = {
       bash = { "shellcheck" },
       javascript = { "oxlint" },
+      -- Dockerfile = { "hadolint" },
       -- zsh = { "zsh" },
     },
   },
