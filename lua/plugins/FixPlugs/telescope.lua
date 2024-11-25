@@ -18,12 +18,12 @@ return {
     { "<leadfer>sG", false },
 
     --搜索文件名
-    { "<leader>r",   LazyVim.telescope("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+    { "<leader>r",   LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
     { "<leader>R",   "<cmd>Telescope oldfiles<cr>",                         desc = "Recent (root Dir)" },
 
     -- 使用grep搜索文本所在的文件
-    { "<leader>/",   LazyVim.telescope("live_grep", { cwd = false }),       desc = "Grep (cwd)" },
-    { "<leader>?",   LazyVim.telescope("live_grep"),                        desc = "Grep (root Dir)" },
+    { "<leader>/",   LazyVim.pick("live_grep", { cwd = false }),       desc = "Grep (cwd)" },
+    { "<leader>?",   LazyVim.pick("live_grep"),                        desc = "Grep (root Dir)" },
   },
   opts = function()
     -- opts如果为函数，则需要返回他的配置选项，之所以有时候是函数，是因为前面需要一些预处理，来为要返回配置做铺垫
@@ -38,12 +38,12 @@ return {
     local find_files_no_ignore = function()
       local action_state = require("telescope.actions.state")
       local line = action_state.get_current_line()
-      LazyVim.telescope("find_files", { no_ignore = true, default_text = line })()
+      LazyVim.pick("find_files", { no_ignore = true, default_text = line })()
     end
     local find_files_with_hidden = function()
       local action_state = require("telescope.actions.state")
       local line = action_state.get_current_line()
-      LazyVim.telescope("find_files", { hidden = true, default_text = line })()
+      LazyVim.pick("find_files", { hidden = true, default_text = line })()
     end
 
     return {

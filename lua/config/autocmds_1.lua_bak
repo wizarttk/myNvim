@@ -15,30 +15,6 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-  pattern = { "*" },
-  callback = function()
-    -- 获取当前行
-    local line = vim.api.nvim_get_current_line()
-
-    -- 获取当前光标所在的列
-    local _, col = unpack(vim.api.nvim_win_get_cursor(0))
-
-    -- 获取注释符号（去掉 %s ）
-    local commentstring = vim.bo.commentstring:gsub("%%s", "")
-
-    -- 查找注释符号在行中的位置
-    local comment_pos = line:find(commentstring, 1, true)
-
-    -- 如果找到了注释符号，并且光标位于注释符号之后
-    if comment_pos and col > comment_pos then
-      vim.fn.system("fcitx5-remote -o")
-      -- else
-      --   return
-    end
-  end
-})
-
 -- 自动插入shebang
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = { "*.sh" }, -- 匹配

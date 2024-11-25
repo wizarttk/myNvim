@@ -14,9 +14,9 @@ return {
     { "s", mode = { "x", "o", "n" }, false },
     -- {"S",mode={"x","o","n"},false},
     -- 修改映射
-    { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },            -- Flash跳转
-    -- {"<C-f>", mode = { "n", "x", "o" }, function() require("flash").toggle()  end, desc ="Search"},
-    { "s", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" }, -- 块选择
+    { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },                -- Flash跳转
+    -- { "<C-f>", mode = { "n", "x", "o" }, function() require("flash").toggle() end,     desc = "Search" },
+    { "s", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },     -- 块选择
   },
   --stylua: ignore end
 

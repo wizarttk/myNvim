@@ -1,3 +1,13 @@
+--[[
+mapping:
+<F5>rr         RunCode       -- 运行代码
+<F5>rf        RunFile        -- 在新标签页运行代码
+<F5>rp        RunProject     -- 运行当前项目（只有当你在一个项目当中的时候）
+<F5>rc        RunClose       -- 关闭运行代码的窗口或终端
+<F5>crf       CRFiletype     -- 使用支持的文件打开 json（仅当您配置了 json 文件时使用）
+<F5>crp       CRProjects     -- 打开带有项目列表的 json（仅当您配置了 json 文件时使用）
+--]]
+
 return {
   "CRAG666/code_runner.nvim",
   opts = {
@@ -10,6 +20,8 @@ return {
         "java $fileNameWithoutExt"
       },
       python = "python3 -u",
+      --TODO:
+      -- go = "go run", -- 自己加上的
       typescript = "deno run",
       rust = {
         "cd $dir &&",
