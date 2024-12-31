@@ -21,7 +21,7 @@ return {
     { "<leader>ct", "<cmd>ColorizerToggle<cr>", desc = "Colorizer Toggle" },
   },
 
-  config = function(_, opts)
-    require("colorizer").setup(opts)
-  end
+  -- config = function(_, opts)
+  --   require("colorizer").setup(opts)
+  -- end
 }

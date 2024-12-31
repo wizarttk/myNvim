@@ -32,8 +32,6 @@ iab maiin main
 iab mian main
 iab strrut struct
 iab funcc func
-iab pakcage package
-iab pakage package
 iab tyep type
 iab ypte type
 iab iimport import
@@ -46,7 +44,15 @@ iab importt import
 iab pacakge package
 iab packageg package
 iab packakge pakcage
+iab packaeg package
+iab pakcage package
+iab pakage package
+iab pakcaeg package
+iab pakcege package
+iab pakcaeg package
+iab pakckaeg package
 iab acpakge package
+iab apckaeg package
 iab errr err
 iab reutrn return
 iab reutnr return

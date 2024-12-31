@@ -1,7 +1,12 @@
-local sdd --修改未使用变量的颜色
+-- local sdd --修改未使用变量的颜色
 return {
   "folke/tokyonight.nvim",
   opts = {
+
+    -- djakdjaskdj
+    plugins = {
+      snacks = true,
+    },
 
     -- https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_night.lua
     -- 覆盖颜色
@@ -59,9 +64,9 @@ return {
     end,
   },
 
-  config = function(_, opts)
-    require("tokyonight").setup(opts)
-  end,
+  -- config = function(_, opts)
+  --   require("tokyonight").setup(opts)
+  -- end,
 
 
 }

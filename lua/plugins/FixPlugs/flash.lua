@@ -8,29 +8,27 @@
 
 return {
   "folke/flash.nvim",
-  --stylua: ignore start
+  -- stylua: ignore start
   keys = {
-    -- 取消映射
-    { "s", mode = { "x", "o", "n" }, false },
-    -- {"S",mode={"x","o","n"},false},
     -- 修改映射
-    { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },                -- Flash跳转
-    -- { "<C-f>", mode = { "n", "x", "o" }, function() require("flash").toggle() end,     desc = "Search" },
-    { "s", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },     -- 块选择
+    { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },            -- Flash跳转
+    { "s", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" }, -- 块选择
   },
-  --stylua: ignore end
+  -- stylua: ignore end
 
   opts = {
     modes = {
+      search = {
+        enabled = true,
+      },
       char = {
         enabled = false,
-        jump_labels = true,
-        keys = {},
       },
     },
   },
 
-  config = function(_, opts)
-    require("flash").setup(opts)
-  end
+  --config函数是多余的，因为当提供opts时，LazyVim会自动调用setup
+  -- config = function(_, opts)
+  --   require("flash").setup(opts)
+  -- end
 }

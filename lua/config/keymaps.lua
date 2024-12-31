@@ -1,5 +1,6 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+--
 -- Add any additional keymaps here
 --[[
 全局映射：(更加底层)
@@ -88,6 +89,7 @@ local mappings = {
 
   -- mode_nv
   { mode_nv,  "0",         "q",                                    { noremap = true, desc = "Macro" } },
+
   { mode_nv,  "<C-f>",     "/",                                    { noremap = true, desc = "Flash search" } },
   { mode_nv,  "<C-d>",     ctrl_d_cmd,                             { noremap = true, desc = "move down 5 lines" } },
   { mode_nv,  "<C-u>",     ctrl_u_cmd,                             { noremap = true, desc = "move up 5 lines" } },
@@ -148,7 +150,7 @@ local mappings = {
   { "",       "<S-h>",     "0",                                    { noremap = false, desc = "move to the beginning of line" } },
 
   -- mode_t
-  { mode_t,   "<C-h>",     "<BS>",                                 { noremap = false, desc = "Backspace" } },
+  -- { mode_t,   "<C-h>",     "<BS>",                                 { noremap = false, desc = "Backspace" } },
 }
 
 

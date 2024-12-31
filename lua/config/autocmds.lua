@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   end,
 })
 
+-- 注释时自动切换输入法
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
   pattern = { "*" },
   callback = function()

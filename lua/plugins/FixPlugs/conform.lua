@@ -3,9 +3,9 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   opts = {
     formatters_by_ft = {
-      lua        = { "luaformatter" },
-      zsh        = { "beautysh" },
-      bash       = { "beautysh" },
+      lua = { "luaformatter" },
+      zsh = { "beautysh" },
+      bash = { "beautysh" },
       -- python     = { "pyright" },
       javascript = { "tsserver" },
       -- go         = { "gopls" }
@@ -16,5 +16,4 @@ return {
   -- config = function(_, opts)
   --   require("bufferline").setup(opts)
   -- end
-
 }
