@@ -20,7 +20,7 @@ return {
       "#ff763b", -- 霓虹橙（Neon Orange）
       "#ffea00", -- 霓虹黄（Neon Yellow）
       "#39ff14", -- 霓虹绿（Neon Green）
-      "#0abdc6", -- 霓虹蓝（Neon Blue）
+      "#0066ff", -- 霓虹蓝（Neon Blue）
       "#2dffe6", -- 霓虹青（Neon Aqua）
       "#da00ff", -- 霓虹紫（Neon Purple）
     }
@@ -31,6 +31,10 @@ return {
         vim.api.nvim_set_hl(0, "RainbowIndent" .. i, { fg = color })
       end
     end)
+
+    -- 存储原始键位映射
+    local original_mappings = {}
+    local keys = { "<C-h>", "<C-j>", "<C-k>", "<C-l>" }
 
     -- 返回合并后的配置
     --[[
@@ -49,6 +53,59 @@ return {
         win = {
           border = "rounded",
           position = "float",
+        },
+      },
+
+      zen = {
+
+        show = {
+          statusline = false, -- can only be shown when using the global statusline
+          tabline = true,
+        },
+
+        --在zen模式下禁用指定keys的映射，防止误触退出zen模式
+
+        on_open = function(win) -- on_open：窗口打开时的回调函数
+          -- 保存所有方向键的原始映射
+          for _, key in ipairs(keys) do
+            original_mappings[key] = vim.fn.maparg(key, "n")
+            -- 在zen模式下禁用映射
+            vim.keymap.set("n", key, "<NOP>", { buffer = true })
+          end
+        end,
+
+        on_close = function(win) -- on_open：窗口关闭时的回调函数
+          -- 恢复所有方向键的原始映射
+          for _, key in ipairs(keys) do
+            if original_mappings[key] ~= "" then
+              -- 如果有原始映射，恢复它
+              vim.keymap.set("n", key, original_mappings[key], { buffer = true })
+            else
+              -- 如果没有原始映射，删除当前的映射
+              vim.keymap.del("n", key, { buffer = true })
+            end
+          end
+          -- 清空存储的映射
+          original_mappings = {}
+        end,
+
+      },
+
+      styles = {
+        zen = {
+          enter = true,
+          fixbuf = false,
+          minimal = false,
+          width = 120,
+          height = 0,
+          backdrop = { transparent = true, blend = 40 },
+          keys = {
+            q = false,
+          },
+          zindex = 40,
+          wo = {
+            winhighlight = "NormalFloat:Normal",
+          },
         },
       },
 

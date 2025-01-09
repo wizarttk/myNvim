@@ -66,3 +66,11 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     require("lint").try_lint("oxlint")
   end
 })
+
+-- -- 自动切换zen模式的按键
+-- -- 1.切换窗口的时候进行检测
+-- vim.api.nvim_create_autocmd({ "WinEnter" }, {
+--   -- 2. 判断是否是在zen-mode
+--   -- require("snacks").setup({
+--   -- })
+-- })
